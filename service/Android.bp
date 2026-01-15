@@ -23,7 +23,10 @@ cc_library_shared {
         "-Wno-macro-redefined",
         "-Wno-pointer-integer-compare",
         "-Wno-tautological-compare",
-    ],
+    ] + select(soong_config_variable("qtiaudio", "support_aw882xx"), {
+        "true": ["-DAUDIO_SUPPORT_AW882XX"],
+        default: [],
+    }),
 
     srcs: [
         "src/agm.c",
